@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { sculptureList } from './data'
+import UpdateObjectApp from './update-objext'
 
 const Gallery = () => {
   // 局部变量无法在多次渲染中持久保存
@@ -61,9 +62,11 @@ function Counter() {
 /*     setCount(count + 5)
     setCount(count => count + 1) */
 
-    // 每次+3
+    // 每次+2, 执行最后一个count
     setCount(count => count + 2)
+    setCount(count => count + 1)
     setCount(count + 3)
+    setCount(count + 2)
   }
   return (
     <button onClick={handleClick}>click +3 --- { count }</button>
@@ -110,7 +113,9 @@ const App = () => {
       <Gallery />
       <FeedbackForm />
       <Counter />
-      <RequestTracker/>
+      <RequestTracker />
+      <hr />
+      <UpdateObjectApp/>
     </>
   )
 }
