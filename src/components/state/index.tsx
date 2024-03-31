@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { sculptureList } from './data'
 import UpdateObjectApp from './update-objext'
+import UpdateArrayApp from './update-array'
 
 const Gallery = () => {
   // 局部变量无法在多次渲染中持久保存
@@ -104,7 +105,7 @@ function RequestTracker() {
     </>
   )
 }
-
+// 如果变量没有用于 jsx, 不建议使用useState管理变量
 const App = () => {
   return (
     <>
@@ -115,7 +116,9 @@ const App = () => {
       <Counter />
       <RequestTracker />
       <hr />
-      <UpdateObjectApp/>
+      <UpdateObjectApp />
+      <hr />
+      <UpdateArrayApp/>
     </>
   )
 }
