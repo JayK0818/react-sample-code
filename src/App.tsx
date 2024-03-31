@@ -5,6 +5,7 @@ import ConditionApp from './components/condition/index'
 import RederListApp from './components/render-list/index'
 import EventApp from './components/event/index'
 import StateApp from './components/state/index'
+import StateManagement from './components/state-management/index'
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <ConditionApp />
       <RederListApp />
       <EventApp />
-      <StateApp/>
+      <StateApp />
+      <StateManagement/>
     </div>
   );
 }
