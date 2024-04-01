@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useContext, createContext } from 'react'
 import type { ChangeEvent } from 'react'
+import { initialTravelPlan } from './data'
 
 // 管理状态
 function GuessNumber() {
@@ -292,6 +293,113 @@ const ContextApp = ({ children }: any) => {
   )
 }
 
+// 在state中镜像 props
+const CounterChild = ({ count }: { count: number }) => {
+  const [number, setNumber] = useState(count)
+  return (
+    <div>我是子组件 { number }</div>
+  )
+}
+const CounterParent = () => {
+  const [count, setCount] = useState(0)
+  return (
+    <div>
+      <button onClick={() => {
+        setCount(count + 1)
+      }}>click {count} times</button>
+      <CounterChild count={ count } />
+    </div>
+  )
+}
+
+// 不要重复state
+const items = [
+  { title: 'pretzels', id: 0 },
+  { title: 'crispy seaweed', id: 1 },
+  { title: 'granola bar', id: 2 },
+]
+
+const Menu = () => {
+  const [list, setList] = useState(items)
+  const [id, setId] = useState(0)
+  const handleUpdateMenu = (id: number, event: ChangeEvent<HTMLInputElement>): void => {
+    setList(list.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          title: event.target.value.trim()
+        }
+      }
+      return item
+    }))
+  }
+  const handleChooseMenu = (id: number): void => {
+    setId(id)
+  }
+  const selectedItem = list.find(item => item.id === id)
+  return (
+    <>
+      <ul>
+        {
+          list.map(menu => {
+            return (
+              <li key={ menu.id }>
+                <input type="text" value={menu.title} onChange={(event) => {
+                  handleUpdateMenu(menu.id, event)
+                }} />
+                <button onClick={() => { handleChooseMenu(menu.id) }}>choose</button>
+              </li>
+            )
+          })
+        }
+      </ul>
+      <div>{ selectedItem?.title }</div>
+    </>
+  )
+}
+
+// 将数据扁平化
+const PlanTree = ({ plan, id }: any) => {
+  const item = plan[id]
+  const childIds = item.childIds ?? []
+  return (
+    <li>
+      <div>{item.title}</div>
+      <ol>
+        {
+          childIds.length > 0 && (
+            childIds.map((childId: number) => (
+              <PlanTree id={childId} plan={plan} key={ childId } />
+            ))
+          )
+          }
+        </ol>
+    </li>
+  )
+}
+const PlanList = () => {
+  const [plan, setPlan] = useState(initialTravelPlan)
+  const root = plan[0]
+  const childIds = root.childIds
+  return (
+    <div>
+      <div>{root.title}</div>
+      <ol>
+        {
+          childIds.map(childId => {
+            return (
+              <PlanTree
+                id={childId}
+                plan={plan}
+                key={childId}
+              />
+            )
+          })
+        }
+      </ol>
+    </div>
+  )
+}
 const App = () => {
   return (
     <>
@@ -300,7 +408,10 @@ const App = () => {
       <Accordion />
       <ContactApp />
       <TodoApp />
-      <ContextApp/>
+      <ContextApp />
+      <CounterParent />
+      <Menu />
+      <PlanList/>
     </>
   )
 }
