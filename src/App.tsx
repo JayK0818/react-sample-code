@@ -6,6 +6,7 @@ import RederListApp from './components/render-list/index'
 import EventApp from './components/event/index'
 import StateApp from './components/state/index'
 import StateManagement from './components/state-management/index'
+import StateShareApp from './components/state-share/index'
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       <RederListApp />
       <EventApp />
       <StateApp />
-      <StateManagement/>
+      <StateManagement />
+      <StateShareApp/>
     </div>
   );
 }
