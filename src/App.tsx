@@ -7,6 +7,9 @@ import EventApp from './components/event/index'
 import StateApp from './components/state/index'
 import StateManagement from './components/state-management/index'
 import StateShareApp from './components/state-share/index'
+import StateRetentionResetApp from './components/state-retention-reset/index'
+import UseRefApp from './components/hooks/ref'
+import TodoApp from './components//hooks/reducer'
 
 function App() {
   return (
@@ -18,7 +21,11 @@ function App() {
       <EventApp />
       <StateApp />
       <StateManagement />
-      <StateShareApp/>
+      <StateShareApp />
+      <hr />
+      <StateRetentionResetApp />
+      <hr />
+      <UseRefApp/>
     </div>
   );
 }
