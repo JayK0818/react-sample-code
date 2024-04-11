@@ -9,7 +9,7 @@ import StateManagement from './components/state-management/index'
 import StateShareApp from './components/state-share/index'
 import StateRetentionResetApp from './components/state-retention-reset/index'
 import UseRefApp from './components/hooks/ref'
-import TodoApp from './components//hooks/reducer'
+import TodoApp from './components/hooks/reducer'
 
 function App() {
   return (
@@ -25,7 +25,9 @@ function App() {
       <hr />
       <StateRetentionResetApp />
       <hr />
-      <UseRefApp/>
+      <UseRefApp />
+      <hr />
+      <TodoApp/>
     </div>
   );
 }
