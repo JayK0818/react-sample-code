@@ -10,6 +10,7 @@ import StateShareApp from './components/state-share/index'
 import StateRetentionResetApp from './components/state-retention-reset/index'
 import UseRefApp from './components/hooks/ref'
 import TodoApp from './components/hooks/reducer'
+import UseMemoApp from './components/hooks/useMemo'
 
 function App() {
   return (
@@ -27,7 +28,9 @@ function App() {
       <hr />
       <UseRefApp />
       <hr />
-      <TodoApp/>
+      <TodoApp />
+      <hr />
+      <UseMemoApp/>
     </div>
   );
 }
