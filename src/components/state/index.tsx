@@ -106,6 +106,32 @@ function RequestTracker() {
   )
 }
 // 如果变量没有用于 jsx, 不建议使用useState管理变量
+
+// class组件
+class ClassCouner extends React.Component {
+  constructor() {
+    // @ts-ignore
+    super()
+    this.state = {
+      count: 0
+    }
+  }
+  handleIncrement = (): void => {
+    this.setState(state => ({
+      ...state,
+      count: (state as any).count + 1
+    }))
+  }
+  render() {
+    const { count } = this.state as any
+    return (
+      <div>
+        <p>class 组件</p>
+        <button onClick={ this.handleIncrement }>{ count } times</button>
+      </div>
+    )
+  }
+}
 const App = () => {
   return (
     <>
@@ -118,7 +144,9 @@ const App = () => {
       <hr />
       <UpdateObjectApp />
       <hr />
-      <UpdateArrayApp/>
+      <UpdateArrayApp />
+      <hr />
+      <ClassCouner/>
     </>
   )
 }

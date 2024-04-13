@@ -11,6 +11,7 @@ import StateRetentionResetApp from './components/state-retention-reset/index'
 import UseRefApp from './components/hooks/ref'
 import TodoApp from './components/hooks/reducer'
 import UseMemoApp from './components/hooks/useMemo'
+import CustomHookApp from './components/hooks/customHook'
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
       <hr />
       <TodoApp />
       <hr />
-      <UseMemoApp/>
+      <UseMemoApp />
+      <CustomHookApp/>
     </div>
   );
 }
