@@ -12,6 +12,8 @@ import UseRefApp from './components/hooks/ref'
 import TodoApp from './components/hooks/reducer'
 import UseMemoApp from './components/hooks/useMemo'
 import CustomHookApp from './components/hooks/customHook'
+import ClassNameApp from './components/class-name/index'
+import ClassModuleApp from './components/class-module/index'
 
 function App() {
   return (
@@ -32,7 +34,9 @@ function App() {
       <TodoApp />
       <hr />
       <UseMemoApp />
-      <CustomHookApp/>
+      <CustomHookApp />
+      <ClassNameApp />
+      <ClassModuleApp/>
     </div>
   );
 }
