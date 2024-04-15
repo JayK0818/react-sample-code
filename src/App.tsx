@@ -14,10 +14,21 @@ import UseMemoApp from './components/hooks/useMemo'
 import CustomHookApp from './components/hooks/customHook'
 import ClassNameApp from './components/class-name/index'
 import ClassModuleApp from './components/class-module/index'
+import NestRouterApp from './components/router/nested-router'
+import DynamicRouterApp from './components/router/dynamic-router'
+import BaseRouterApp from './components/router/index'
+import ActiveLinkApp from './components/router/active-link'
+import DataLoadingApp from './components/router/data-loading'
+import RedirectRouterApp from './components/router/redirect'
 
 function App() {
   return (
     <div className="App">
+      {/* <ActiveLinkApp/> */}
+      {/* <NestRouterApp /> */}
+      {/* <DynamicRouterApp/> */}
+      <RedirectRouterApp/>
+{/*       <BaseRouterApp/>
       <Gallery />
       <TodoList />
       <ConditionApp />
@@ -35,8 +46,8 @@ function App() {
       <hr />
       <UseMemoApp />
       <CustomHookApp />
-      <ClassNameApp />
-      <ClassModuleApp/>
+      <ClassNameApp /> */}
+      {/* <ClassModuleApp/> */}
     </div>
   );
 }

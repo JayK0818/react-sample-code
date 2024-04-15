@@ -98,7 +98,7 @@ const App = () => {
       }, 2600)
     })
   })
-  console.log('mouse-props:', mouse)
+  // console.log('mouse-props:', mouse)
   return (
     <>
       <SetTitleApp />
