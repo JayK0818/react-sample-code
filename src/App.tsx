@@ -20,14 +20,18 @@ import BaseRouterApp from './components/router/index'
 import ActiveLinkApp from './components/router/active-link'
 import DataLoadingApp from './components/router/data-loading'
 import RedirectRouterApp from './components/router/redirect'
+// import PendingNavigateApp from './components/router/pending-navigation'
+import { useNavigation } from 'react-router-dom'
+import DeferSuspenseApp from './components/router/defer-suspense'
 
 function App() {
   return (
     <div className="App">
+      <DeferSuspenseApp/>
       {/* <ActiveLinkApp/> */}
       {/* <NestRouterApp /> */}
       {/* <DynamicRouterApp/> */}
-      <RedirectRouterApp/>
+      {/* <PendingNavigateApp/> */}
 {/*       <BaseRouterApp/>
       <Gallery />
       <TodoList />
