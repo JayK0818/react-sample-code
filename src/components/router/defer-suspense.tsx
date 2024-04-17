@@ -4,8 +4,8 @@ import {
   NavLink,
   defer,
   Outlet,
+  useNavigation
 } from 'react-router-dom'
-// Todo: 效果未实现
 const playerList = [
   {
     firstName: 'kyrie',
@@ -20,9 +20,11 @@ const playerList = [
 ]
 
 const Home = () => {
+  const navigation = useNavigation()
   return (
     <div>
       <p>我是首页</p>
+      {navigation.state === 'loading' && <div style={{ color: 'red'}}>正在加载...</div> }
       <NavLink to='player-list'>跳转至球员页面</NavLink>
       <Outlet/>
     </div>
@@ -35,6 +37,7 @@ const PlayerList = () => {
   console.log(playerList)
   return (
     <div>
+      {/*  Todo: 效果未实现*/}
       <div>我是球员列表页面</div>
       <Suspense fallback={<div style={{color: '#1890ff'}}>Loading...</div>}>
         <Await resolve={list}>
