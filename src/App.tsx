@@ -23,12 +23,14 @@ import RedirectRouterApp from './components/router/redirect'
 // import PendingNavigateApp from './components/router/pending-navigation'
 // import { useNavigation } from 'react-router-dom'
 // import DeferSuspenseApp from './components/router/defer-suspense'
-import DataMutationApp from './components/router/data-mutation'
+// import DataMutationApp from './components/router/data-mutation'
+import 'antd/dist/reset.css'
+import ReactRouterApp from './components/react-router-app/index'
 
 function App() {
   return (
     <div className="App">
-      <DataMutationApp/>
+      <ReactRouterApp/>
       {/* <ActiveLinkApp/> */}
       {/* <NestRouterApp /> */}
       {/* <DynamicRouterApp/> */}
