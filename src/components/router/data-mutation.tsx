@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Form, redirect, useNavigation } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Form, redirect, useNavigation, Outlet } from 'react-router-dom'
 import React, { useState } from 'react'
 import type { ChangeEvent } from 'react'
 
@@ -14,10 +14,11 @@ const FormComponent = () => {
   }
   // console.log(navigation)
   return (
-    <Form action='/login'>
+    <Form method='post'>
       <input value={username} onChange={handleUserNameChanged} type='text' placeholder='用户名' />
       <input type="text" value={password} onChange={handlePasswordChanged} placeholder='密码' />
       <button type='submit'>提交</button>
+      <Outlet/>
     </Form>
   )
 }
@@ -27,6 +28,12 @@ const Login = () => {
     <div>
       <div>我是登录页面</div>
     </div>
+  )
+}
+
+const DataCollection = () => {
+  return (
+    <div>你好吗?</div>
   )
 }
 
@@ -40,10 +47,17 @@ const router = createBrowserRouter([
     // Todo: 此功能未实现
     element: <FormComponent />,
     action: async ({ request }) => {
+      console.log('request:', request.formData())
       await new Promise(resolve => setTimeout(resolve, 2000))
-      const data = await request.formData()
-      return redirect(`/login?data=${JSON.stringify(data)}`)
+      return 'hello world'
+      // return redirect(`/login`)
     }
+/*     children: [
+      {
+        path: 'submit',
+        element: <DataCollection/>
+      }
+    ] */
   }
 ])
 
