@@ -14,7 +14,8 @@ const FormComponent = () => {
   }
   // console.log(navigation)
   return (
-    <Form method='post'>
+    <Form method='post' action='submit'>
+      {/* action 会向此路径提交一个请求, 在action函数中执行完成之后 然后通过redirect重定向 */}
       <input value={username} onChange={handleUserNameChanged} type='text' placeholder='用户名' />
       <input type="text" value={password} onChange={handlePasswordChanged} placeholder='密码' />
       <button type='submit'>提交</button>
@@ -32,6 +33,7 @@ const Login = () => {
 }
 
 const DataCollection = () => {
+  console.log('我会渲染吗???') // 此组件不会渲染
   return (
     <div>你好吗?</div>
   )
@@ -49,15 +51,23 @@ const router = createBrowserRouter([
     action: async ({ request }) => {
       console.log('request:', request.formData())
       await new Promise(resolve => setTimeout(resolve, 2000))
-      return 'hello world'
+      // return 'hello world'
+      return redirect('/')
       // return redirect(`/login`)
-    }
-/*     children: [
+    },
+    children: [
       {
         path: 'submit',
-        element: <DataCollection/>
+        element: <DataCollection />,
+        errorElement: <div>Something went wrong!!!</div>,
+        action: async ({ request }: any) => {
+          console.log('request:', request)
+          await new Promise(resolve => setTimeout(resolve, 2000))
+          console.log('执行完了!!!')
+          return redirect('/form')
+        }
       }
-    ] */
+    ]
   }
 ])
 
