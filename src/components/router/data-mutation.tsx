@@ -16,8 +16,8 @@ const FormComponent = () => {
   return (
     <Form method='post' action='submit'>
       {/* action 会向此路径提交一个请求, 在action函数中执行完成之后 然后通过redirect重定向 */}
-      <input value={username} onChange={handleUserNameChanged} type='text' placeholder='用户名' />
-      <input type="text" value={password} onChange={handlePasswordChanged} placeholder='密码' />
+      <input name='username' value={username} onChange={handleUserNameChanged} type='text' placeholder='用户名' />
+      <input name='password' type="text" value={password} onChange={handlePasswordChanged} placeholder='密码' />
       <button type='submit'>提交</button>
       <Outlet/>
     </Form>
@@ -46,25 +46,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/form',
-    // Todo: 此功能未实现
     element: <FormComponent />,
-    action: async ({ request }) => {
-      console.log('request:', request.formData())
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      // return 'hello world'
-      return redirect('/')
-      // return redirect(`/login`)
-    },
     children: [
       {
-        path: 'submit',
+        path: 'submit', // 对应 表单 对应的 action 路径
         element: <DataCollection />,
         errorElement: <div>Something went wrong!!!</div>,
         action: async ({ request }: any) => {
           console.log('request:', request)
+          const data = await request.formData()
+          console.log('username:', data.get('username'))
+          console.log('password:', data.get('password'))
           await new Promise(resolve => setTimeout(resolve, 2000))
           console.log('执行完了!!!')
-          return redirect('/form')
+          return redirect('/login')
         }
       }
     ]

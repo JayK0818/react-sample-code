@@ -36,6 +36,7 @@ const router = createBrowserRouter([
       {
         path: 'user',
         element: <User />,
+        // 进入user 组件时执行的逻辑
         loader: async () => {
           const data = await new Promise(resolve => {
             setTimeout(() => {

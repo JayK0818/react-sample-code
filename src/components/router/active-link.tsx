@@ -1,11 +1,15 @@
-import { RouterProvider, NavLink, createBrowserRouter, Outlet } from 'react-router-dom'
+import { RouterProvider, NavLink, createBrowserRouter, Outlet, useMatch } from 'react-router-dom'
 
 const Player = () => {
+  const match = useMatch('player')
+  console.log('player-match:', match)
   return (
     <div>我是球员页面</div>
   )
 }
 const Singer = () => {
+  const match = useMatch('singer')
+  console.log('singer-match', match)
   return (
     <div>我是歌手页面</div>
   )
@@ -59,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'singer',
-        element: <Singer/>
+        element: <Singer />,
+        loader: async () => {
+          await new Promise(resolve => window.setTimeout(resolve, 10 * 1000))
+          return 'hello world'
+        }
       }
     ]
   }

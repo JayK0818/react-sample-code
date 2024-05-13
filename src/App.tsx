@@ -20,7 +20,7 @@ import BaseRouterApp from './components/router/index'
 import ActiveLinkApp from './components/router/active-link'
 import DataLoadingApp from './components/router/data-loading'
 import RedirectRouterApp from './components/router/redirect'
-// import PendingNavigateApp from './components/router/pending-navigation'
+import PendingNavigateApp from './components/router/pending-navigation'
 // import { useNavigation } from 'react-router-dom'
 // import DeferSuspenseApp from './components/router/defer-suspense'
 import DataMutationApp from './components/router/data-mutation'
@@ -30,11 +30,11 @@ import 'antd/dist/reset.css'
 function App() {
   return (
     <div className="App">
-      <DataMutationApp/>
+      {/* <DataMutationApp/> */}
       {/* <ActiveLinkApp/> */}
       {/* <NestRouterApp /> */}
       {/* <DynamicRouterApp/> */}
-      {/* <PendingNavigateApp/> */}
+      <PendingNavigateApp/>
 {/*       <BaseRouterApp/>
       <Gallery />
       <TodoList />
