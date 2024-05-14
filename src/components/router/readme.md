@@ -60,8 +60,22 @@ const Player = () => { // 页面路径为 /player
     <div>Player page</div>
   )
 }
-```
 
+// Location State
+/**
+ * location.state just like location.hash or location.search except instead of putting the 
+ * values in the URL it is hidden
+*/
+<Link to='/user' state={{ from: 'home' }}></Link>
+
+const navigate = useNavigate()
+navigate('/user', { state: 'home' })
+
+// 获取数据
+import { useLocation } from 'react-router-dom'
+const location = useLocation()
+console.log(location.state)
+```
 ## Data Loading
 
 ```tsx
@@ -90,4 +104,19 @@ const Root = () => {
     </div>
   )
 }
+```
+
+## Outlets
+
+```tsx
+// 用来渲染嵌套路由
+const App = () => {
+  return (
+    <div>
+      <NavigationBar/>
+      <Outlet/>
+    </div>
+  )
+}
+// The Outlet component will always render the next match.
 ```
