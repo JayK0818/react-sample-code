@@ -28,7 +28,9 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+], {
+  basename: '/react-app'  // 需要写为根路径, 在页面中跳转时 无需添加此 路径
+})
 createRoot(document.getElementById('root')).render(
   <RouterProvider router={router}/>
 )

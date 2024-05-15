@@ -26,6 +26,8 @@ import PendingNavigateApp from './components/router/pending-navigation'
 import DataMutationApp from './components/router/data-mutation'
 import 'antd/dist/reset.css'
 // import ReactRouterApp from './components/react-router-app/index'
+import CreateBrowserRouterApp from './components/router/create-browser-router'
+import CreateHashRouterApp from './components/router/create-hash-router'
 
 function App() {
   return (
@@ -34,7 +36,7 @@ function App() {
       {/* <ActiveLinkApp/> */}
       {/* <NestRouterApp /> */}
       {/* <DynamicRouterApp/> */}
-      <PendingNavigateApp/>
+      {/* <PendingNavigateApp/> */}
 {/*       <BaseRouterApp/>
       <Gallery />
       <TodoList />
@@ -55,6 +57,7 @@ function App() {
       <CustomHookApp />
       <ClassNameApp /> */}
       {/* <ClassModuleApp/> */}
+      <CreateHashRouterApp/>
     </div>
   );
 }
