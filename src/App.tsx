@@ -27,7 +27,9 @@ import DataMutationApp from './components/router/data-mutation'
 import 'antd/dist/reset.css'
 // import ReactRouterApp from './components/react-router-app/index'
 import CreateBrowserRouterApp from './components/router/create-browser-router'
-import CreateHashRouterApp from './components/router/create-hash-router'
+// import CreateHashRouterApp from './components/router/create-hash-router'
+// import HighOrderComponent from './components/high-order-component/index'
+import CounterContextComponent from './components/context/index'
 
 function App() {
   return (
@@ -57,7 +59,7 @@ function App() {
       <CustomHookApp />
       <ClassNameApp /> */}
       {/* <ClassModuleApp/> */}
-      <CreateHashRouterApp/>
+      <CounterContextComponent/>
     </div>
   );
 }
