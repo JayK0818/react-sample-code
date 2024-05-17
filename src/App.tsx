@@ -29,7 +29,8 @@ import 'antd/dist/reset.css'
 import CreateBrowserRouterApp from './components/router/create-browser-router'
 // import CreateHashRouterApp from './components/router/create-hash-router'
 // import HighOrderComponent from './components/high-order-component/index'
-import CounterContextComponent from './components/context/index'
+// import CounterContextComponent from './components/context/index'
+import ReduxApp from './components/redux'
 
 function App() {
   return (
@@ -59,7 +60,7 @@ function App() {
       <CustomHookApp />
       <ClassNameApp /> */}
       {/* <ClassModuleApp/> */}
-      <CounterContextComponent/>
+      <ReduxApp/>
     </div>
   );
 }
