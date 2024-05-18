@@ -1,8 +1,9 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 import { Button } from 'antd'
-import { useSelector, Provider } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+import { increment, decrement, incrementByAmount } from '../../../store/counter'
 
-const counterSlice = createSlice({
+/* const counterSlice = createSlice({
   name: 'counter',
   initialState: 0,
   reducers: {
@@ -16,15 +17,19 @@ const store = configureStore({
 })
 
 const { decrement, increment } = counterSlice.actions
-
+ */
 const Counter = () => {
-  store.subscribe(() => {
+/*   store.subscribe(() => {
     console.log(store.getState())
-  })
+  }) */
+  const dispatch = useAppDispatch()
+  const count = useAppSelector(state => state.counter)
   return (
     <div>
-      <Button onClick={() => store.dispatch(increment())}>+1</Button>
-      <Button onClick={() => store.dispatch(decrement())}>-1</Button>
+      <Button type={'primary'} onClick={() => dispatch(increment())}>+1</Button>
+      {count}
+      <Button type={'primary'} onClick={() => dispatch(incrementByAmount(4))}>+4</Button>
+      <Button type={'primary'} danger onClick={() => dispatch(decrement())}>-1</Button>
     </div>
   )
 }

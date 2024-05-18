@@ -43,7 +43,46 @@ store.dispatch(decrement())
     sets up a well-configured Redux store with a single function call, including combing reducers, andding 
     the thunk middleware.
 
+```ts
+// store相关的 type
+export type RootStore = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch // innered type
+
+// It's better to create typed versions of the useDispatch and useSelector hooks for usage in your application
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootState, AppDispatch } from './store'
+
+const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+const useAppSelector = useSelector.withTypes<RootState>()
+```
 ## createSlice
 
   lets you write reducers that use the the immer library to enable writing immutable updates using 'mutating' JS syntax. It also automatically generates action creator functions for each reducer, and generates action
   type strings internally based on your reducer's names.
+
+  Each slice file should define a type for its initial state value, so that **createSlice** can correctly infer the type of **state** in each case reducer
+  (每个字段的初始值需要定义一个类型, 这样 createSlice 可以正确的推断出 state的 每个类型)
+
+  All generated actions should be defined using the **PayloadAction<T>** type. which takes the type of the
+  **action.payload** field as its generic argument.
+
+```ts
+import type { PayloadAction } from '@redux/toolkit'
+import { createSlice } from '@redux/toolkit'
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {
+    increment: state => state + 1,
+    decrement: state => state - 1,
+    incrementByAmount: (state, action: PayloadAction<number>) => {
+      return state + action.payload
+    }
+  }
+})
+
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+export default counterSlice.reducer
+```
