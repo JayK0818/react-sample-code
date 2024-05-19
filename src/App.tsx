@@ -31,6 +31,8 @@ import CreateBrowserRouterApp from './components/router/create-browser-router'
 // import HighOrderComponent from './components/high-order-component/index'
 // import CounterContextComponent from './components/context/index'
 import ReduxApp from './components/redux'
+import FixedTable from './components/fixed-table'
+import RouterProtectApp from './components/router-protect'
 
 function App() {
   return (
@@ -60,7 +62,9 @@ function App() {
       <CustomHookApp />
       <ClassNameApp /> */}
       {/* <ClassModuleApp/> */}
-      <ReduxApp/>
+{/*       <ReduxApp />
+      <FixedTable/> */}
+      <RouterProtectApp/>
     </div>
   );
 }

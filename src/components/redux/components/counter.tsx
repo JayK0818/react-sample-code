@@ -1,7 +1,7 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+// import { createSlice, configureStore } from '@reduxjs/toolkit'
 import { Button } from 'antd'
-import { useAppDispatch, useAppSelector } from '../../../store/hooks'
-import { increment, decrement, incrementByAmount } from '../../../store/counter'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { increment, decrement, incrementByAmount } from '@/store/counter'
 
 /* const counterSlice = createSlice({
   name: 'counter',
