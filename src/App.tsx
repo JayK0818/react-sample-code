@@ -9,7 +9,7 @@ import StateManagement from './components/state-management/index'
 import StateShareApp from './components/state-share/index'
 import StateRetentionResetApp from './components/state-retention-reset/index'
 import UseRefApp from './components/hooks/ref'
-import TodoApp from './components/hooks/reducer'
+// import TodoApp from './components/hooks/reducer'
 import UseMemoApp from './components/hooks/useMemo'
 import CustomHookApp from './components/hooks/customHook'
 import ClassNameApp from './components/class-name/index'
@@ -32,7 +32,9 @@ import CreateBrowserRouterApp from './components/router/create-browser-router'
 // import CounterContextComponent from './components/context/index'
 import ReduxApp from './components/redux'
 import FixedTable from './components/fixed-table'
-import RouterProtectApp from './components/router-protect'
+// import RouterProtectApp from './components/router-protect'
+// import FormApp from './components/form/index'
+import TodoApp from './components/redux/components/reselect'
 
 function App() {
   return (
@@ -64,7 +66,7 @@ function App() {
       {/* <ClassModuleApp/> */}
 {/*       <ReduxApp />
       <FixedTable/> */}
-      <RouterProtectApp/>
+      <TodoApp/>
     </div>
   );
 }

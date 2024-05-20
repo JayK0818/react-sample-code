@@ -86,3 +86,8 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 export default counterSlice.reducer
 ```
+
+## Reselect
+
+  A library for creating memoized 'selector' functions. Commonly used with Redux, but usable with any plain JS
+  immutable data as well.
