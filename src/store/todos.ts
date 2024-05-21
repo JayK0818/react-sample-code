@@ -41,28 +41,54 @@ const todoSlice = createSlice({
 
 export const { addTodo, deleteTodo, toggleTodo } = todoSlice.actions;
 
-/* const selectCompletedTodos = (state: RootState) => {
-  console.log("hello, computed todos");
-  return state.todos.filter(todo => todo.completed === true)
-}; */
+const getTodos = (state: RootState) => state.todos
 
-const memorizedCompletedTodos = createSelector([
-  (state: RootState) => state.todos
-], (todos) => {
-  console.log('我被缓存了')
-  return todos.filter((todo) => todo);
-});
-
-const completedTodos = (state: RootState) => {
-  console.log('我会重新计算')
-  return state.todos.filter(todo => todo)
-}
-
-const getAllTodoLength = (state: RootState) => {
-  console.log('重新计算length了吗')
-  return state.todos.length;
+const getTodoById = (todoList: TodoListProps[] = [], id: number) => {
+  console.log("我计算了吗");
+  const targetTodo = todoList.find((todo) => todo.id === id);
+  return targetTodo ?? null;
 };
 
-export { memorizedCompletedTodos, getAllTodoLength, completedTodos };
+const memorizedTodoById = createSelector(
+  [(state: RootState) => state.todos],
+  (todos) => {
+    console.log('我重新计算了吗')
+    return todos.find(todo => todo.id === 1)
+  }
+)
+
+/* const memorizedTodoLength = createSelector(
+  [
+    (state: RootState) => state.todos.filter(todo => todo.completed),
+    (state: RootState) => state.todos.filter(todo => !todo.completed)
+  ],
+  (completedTodoList, unCompletedTodoList) => {
+    console.log('总长度计算了吗')
+    return completedTodoList.length + unCompletedTodoList.length
+  }
+) */
+
+const selectTodoById = (state: RootState, id: number) => {
+  console.log('查找被重新计算了吗')
+  return state.todos.find(todo => todo.id === id)
+}
+
+const selectTodoMemorizedById = createSelector(
+  [(state: RootState, id: number) => state.todos.find(todo => todo.id === id)],
+  (target) => {
+    console.log('target:', target)
+    return Object.assign({}, target, {
+      message: 'hello'
+    })
+  }
+)
+
+export {
+  getTodos,
+  getTodoById,
+  memorizedTodoById,
+  selectTodoById,
+  selectTodoMemorizedById,
+};
 
 export default todoSlice.reducer

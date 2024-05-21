@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react'
 import { Input, Button, message, Empty, Checkbox } from 'antd'
-import { addTodo, deleteTodo, toggleTodo, memorizedCompletedTodos, getAllTodoLength, completedTodos } from '@/store/todos'
+import { addTodo, deleteTodo, toggleTodo, getTodos, getTodoById, memorizedTodoById, selectTodoById, selectTodoMemorizedById } from '@/store/todos'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 const AddTodo = () => {
@@ -9,9 +9,11 @@ const AddTodo = () => {
   const handleTodoChanged = (event: ChangeEvent<HTMLInputElement>): void => {
     setTodo(event.target.value)
   }
-  const memorizedTodos = useAppSelector(memorizedCompletedTodos)
-  const todos = useAppSelector(completedTodos)
-  const todoLength = useAppSelector(getAllTodoLength)
+  const findTodo = useAppSelector(state => getTodoById(state.todos, 1))
+  const findMemorizedTodo = useAppSelector(state => memorizedTodoById(state))
+  // const todoLength = useAppSelector(state => memorizedTodoLength(state))
+  // const findTodoById = useAppSelector(state => selectTodoById(state, 1))
+  const memorizedTargetTodo = useAppSelector(state => selectTodoMemorizedById(state, 1))
   const handleAddTodo = (): void => {
     if (!todo) {
       message.warning('请输入代办事项')
@@ -26,15 +28,14 @@ const AddTodo = () => {
         <Input value={todo} onChange={ handleTodoChanged } />
         <Button onClick={handleAddTodo}>确定</Button>
       </div>
-      {JSON.stringify(memorizedTodos)} --- {JSON.stringify(todos)}
+      {JSON.stringify(memorizedTargetTodo)}
     </>
   )
 }
 
 const TodoList = () => {
-  // const todoList = useAppSelector(state => state.todos)
   const dispatch = useAppDispatch()
-  const todoList = useAppSelector(memorizedCompletedTodos)
+  const todoList = useAppSelector(state => state.todos)
   const handleToggle = (id: number) => {
     dispatch(toggleTodo(id))
   }
