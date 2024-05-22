@@ -91,3 +91,29 @@ export default counterSlice.reducer
 
   A library for creating memoized 'selector' functions. Commonly used with Redux, but usable with any plain JS
   immutable data as well.
+
+  Reselect exports a **createSelector** API, which generates memorized selector functions. **createSelector** accepts
+  one or more **input selectors**, which extract values from arguments and a **result function** function that receives the extracted values and should return a derived value.
+```ts
+const memoizedSelectCompletedTodos = createSelector(
+  [(state: RootState, a: number, b: number, c: number) => state.todos],
+  todos => {
+    console.log('memoized selector ran')
+    return todos.filter(todo => todo.completed === true)
+  }
+)
+
+import { useSelector } from 'react-redux'
+const App = () => {
+  const findTodo = useSelector(state => memoizedSelectCompletedTodos(state, 1, 2, 3))
+  return (
+    <div>{}</div>
+  )
+}
+
+// usage
+const outputSelector = createSelector(
+  [inputSelector1, inputSelector2, inputSelector3], // synonymous with `dependencies`.
+  resultFunc // Result function
+)
+```

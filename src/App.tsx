@@ -34,7 +34,8 @@ import ReduxApp from './components/redux'
 import FixedTable from './components/fixed-table'
 // import RouterProtectApp from './components/router-protect'
 // import FormApp from './components/form/index'
-import TodoApp from './components/redux/components/reselect'
+// import TodoApp from './components/redux/components/reselect'
+import RefApp from './components/ref/index'
 
 function App() {
   return (
@@ -66,7 +67,7 @@ function App() {
       {/* <ClassModuleApp/> */}
 {/*       <ReduxApp />
       <FixedTable/> */}
-      <TodoApp/>
+      <RefApp/>
     </div>
   );
 }

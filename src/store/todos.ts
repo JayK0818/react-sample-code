@@ -68,12 +68,12 @@ const memorizedTodoById = createSelector(
   }
 ) */
 
-const selectTodoById = (state: RootState, id: number) => {
-  console.log('查找被重新计算了吗')
+const selectTodoById = (state: RootState, id: number, value: any) => {
+  console.log('查找被重新计算了吗', state, id, value)
   return state.todos.find(todo => todo.id === id)
 }
 
-const selectTodoMemorizedById = createSelector(
+/* const selectTodoMemorizedById = createSelector(
   [(state: RootState, id: number) => state.todos.find(todo => todo.id === id)],
   (target) => {
     console.log('target:', target)
@@ -81,7 +81,13 @@ const selectTodoMemorizedById = createSelector(
       message: 'hello'
     })
   }
-)
+) */
+const selectTodoMemorizedById = createSelector([selectTodoById], (target) => {
+  console.log('target:', target)
+  return Object.assign({}, target, {
+    message: 'hello'
+  })
+});
 
 export {
   getTodos,
