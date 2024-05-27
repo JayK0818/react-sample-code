@@ -1,21 +1,22 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Button } from 'antd'
 
-// 使用 useRef 清除定时器
 const RefTimerApp = () => {
   const timerRef = useRef<null | number>(null)
   const [count, setCount] = useState(0)
   useEffect(() => {
-    if (timerRef.current) return
+    console.log(timerRef.current)
     timerRef.current = window.setInterval(() => {
       console.log('hello')
     }, 1000)
-    console.log(timerRef.current)
+    return () => {
+      timerRef.current && window.clearTimeout(timerRef.current)
+    }
   }, [])
   const handleClick = (): void => {
     setCount(count + 1)
     if (count === 3) {
-      console.log('hello, 清除了吗')
+      console.log('hello, 清除了吗', timerRef.current)
       timerRef.current && window.clearInterval(timerRef.current)
       timerRef.current = null
     }
@@ -29,22 +30,30 @@ const RefTimerApp = () => {
 
 const UnClearIntervalApp = () => {
   const [count, setCount] = useState(0)
-  // let timer: null | number = null // 每次重新更新 timer为null
-  const [timer, setTimer] = useState<null | number>(null)
+  let _timer: null | number = null // 每次重新更新 timer为null
+  const [timer, setTimer] = useState<number | null>(null)
   const handleClick = (): void => {
+    console.log('_timer:', _timer)
     setCount(count + 1)
     if (count === 3) {
-      console.log('清除了吗？', timer)
-      timer && window.clearInterval(timer)
+      console.log(timer)
+      if (timer) {
+        window.clearTimeout(timer)
+      }
     }
   }
+  // 在测试环境下 执行两次无法清除, 执行一次时 可以清除
   useEffect(() => {
-    console.log('执行了吗')
     const t = window.setInterval(() => {
       console.log('world!!!')
     }, 1000)
+    _timer = t
+    console.log('timer,', t)
+    // setTimer(timer.concat(t))
     setTimer(t)
-    console.log('timer:', timer)
+    return () => {
+      window.clearTimeout(t)
+    }
   }, [])
   return (
     <div>
@@ -53,11 +62,26 @@ const UnClearIntervalApp = () => {
   )
 }
 
+// 自动获取焦点
+const FocusInput = () => {
+  const inputRef = useRef<null | HTMLInputElement>(null)
+  useEffect(() => {
+    console.log(inputRef)
+    inputRef.current?.focus()
+  }, [])
+  return (
+    <div>
+      <input ref={ inputRef } />
+    </div>
+  )
+}
+
 const App = () => {
   return (
     <>
-      {/* <RefTimerApp /> */}
-      <UnClearIntervalApp/>
+      <RefTimerApp />
+      {/* <UnClearIntervalApp/> */}
+      <FocusInput/>
     </>
   )
 }

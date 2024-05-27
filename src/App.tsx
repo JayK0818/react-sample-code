@@ -36,6 +36,7 @@ import FixedTable from './components/fixed-table'
 // import FormApp from './components/form/index'
 // import TodoApp from './components/redux/components/reselect'
 import RefApp from './components/ref/index'
+import TasksApp from './components/hooks/context-with-reducer'
 
 function App() {
   return (
@@ -67,7 +68,8 @@ function App() {
       {/* <ClassModuleApp/> */}
 {/*       <ReduxApp />
       <FixedTable/> */}
-      <RefApp/>
+      {/* <RefApp/> */}
+      <TasksApp/>
     </div>
   );
 }
