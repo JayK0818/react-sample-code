@@ -1,4 +1,5 @@
 import { useReducer, useContext, createContext, useState, ChangeEvent } from 'react'
+import { Input, Button, Checkbox, message } from 'antd'
 
 const initialTasks = [
   { id: 0, text: 'Philosopher’s Path', done: true },
@@ -7,6 +8,7 @@ const initialTasks = [
 ]
 
 function taskReducers(state: any[]= [], action: { type: string, payload: any }): typeof initialTasks {
+  console.log('action', action)
   switch (action.type) {
     case 'add':
       return [...state, {
@@ -84,7 +86,7 @@ const AddTask = () => {
  */
 
 // 以下方式 不会 tasks列表不会更新数据
-const AddTask = () => {
+/* const AddTask = () => {
   const [task, setTask] = useState('')
   const [tasks, dispatch] = useReducer(taskReducers, initialTasks)
   const handleTaskChanged = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -123,6 +125,70 @@ const TaskApp = () => {
       </ul>
       <div>{ state.length } todos</div>
     </div>
+  )
+} */
+
+// 使用自定义hook 以下代码无法自动更新 tasks
+const useTaskHook = () => {
+  const [tasks, dispatch] = useReducer(taskReducers, initialTasks)
+  return {
+    tasks,
+    dispatch
+  }
+}
+
+const AddTask = () => {
+  const { dispatch, tasks } = useTaskHook()
+  const [task, setTask] = useState('')
+  const handleTaskChanged = (event: ChangeEvent<HTMLInputElement>): void => {
+    setTask(event?.target.value.trim())
+  }
+  const handleAddTask = (): void => {
+    if (!task) {
+      message.warning('任务不得为空')
+      return
+    }
+    dispatch({
+      type: 'add',
+      payload: task
+    })
+    setTask('')
+    console.log('tasks-list:', tasks)
+  }
+  return (
+    <div style={{width: 500, display: 'flex', padding: '10px 0'}}>
+      <Input value={task} onChange={handleTaskChanged} />
+      <Button
+        type='primary'
+        onClick={handleAddTask}
+      >确定</Button>
+    </div>
+  )
+}
+
+const TaskList = () => {
+  const { tasks } = useTaskHook()
+  console.log('tasks-list:', tasks)
+  return (
+    <ul>
+      {
+        tasks.map(task => (
+          <li key={task.id}>
+            <Checkbox checked={task.done} />
+            <span>{ task.text }</span>
+          </li>
+        ))
+      }
+    </ul>
+  )
+}
+
+const TaskApp = () => {
+  return (
+    <>
+      <AddTask />
+      <TaskList/>
+    </>
   )
 }
 

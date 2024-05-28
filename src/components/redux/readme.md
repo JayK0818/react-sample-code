@@ -86,7 +86,12 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 export default counterSlice.reducer
 ```
+  An **Action** is a plain JavaScript object that has a **type** field. We usually write that type string like
+  **domain/eventName**. An action object can have other fields with additional information about what happend.
 
+
+  A **reducer** is a function that receives the current **state** and an **action** object.
+  **(state, action) => newState**
 ## Reselect
 
   A library for creating memoized 'selector' functions. Commonly used with Redux, but usable with any plain JS
@@ -116,4 +121,23 @@ const outputSelector = createSelector(
   [inputSelector1, inputSelector2, inputSelector3], // synonymous with `dependencies`.
   resultFunc // Result function
 )
+```
+
+  In order to update values immutably, your code must make copies of existing objects/arrays, and then modify the copies.
+
+```js
+const obj = {
+  a: {
+    c: 3
+  },
+  b: 2
+}
+
+const obj2 = {
+  ...obj,
+  a: {
+    ...obj.a,
+    c: 42
+  }
+}
 ```
