@@ -66,6 +66,7 @@ const useAppSelector = useSelector.withTypes<RootState>()
   All generated actions should be defined using the **PayloadAction<T>** type. which takes the type of the
   **action.payload** field as its generic argument.
 
+  **createSlice** uses a library called **Immer**
 ```ts
 import type { PayloadAction } from '@redux/toolkit'
 import { createSlice } from '@redux/toolkit'
@@ -83,6 +84,10 @@ const counterSlice = createSlice({
 })
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+// 提取数据
+// If we do change our state structure again, we only need to update the code in the slice file.
+const selectCount = state => state.counter
 
 export default counterSlice.reducer
 ```
@@ -141,3 +146,16 @@ const obj2 = {
   }
 }
 ```
+
+## createAsyncThunk
+
+```ts
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.data
+})
+```
+  createAsyncThunk accepts two arguments:
+1. A string that will be used as the prefix for the generated action types
+2. A 'payload creator' callback function that should return a **Promise** containint some data, or a rejected
+**Promise** with an error
