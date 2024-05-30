@@ -159,3 +159,76 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 1. A string that will be used as the prefix for the generated action types
 2. A 'payload creator' callback function that should return a **Promise** containint some data, or a rejected
 **Promise** with an error
+
+### Thunk arguments
+
+  You can only pass in one argument, and whatever we pass in becomes the first argument of the payload creation callback. 第二个参数 是一个对象 包含一些有用的函数
+
+```tsx
+const incrementAsync = createThunkAsync('incrementAsync', async (n: number, { dispatch, getState }) => {
+  console.log('n:', n) // 打印10
+  console.log(getState()) // getState() 返回的是整个store的数据
+  await new Promise(resolve => setTimeout(resolve, 2000))
+  return 1
+})
+
+const Counter = () => {
+  const dispatch = useDispatch()
+  return (
+    <Button
+      onClick={{} => dispatch(incrementAsync(10))}
+    >click</Button>
+  )
+}
+```
+
+  The **builder** object in **extraReducers** provides methods that let us define additional case reducers
+  that will run in response to actions defined outside of the slice:
+
+```js
+builder.addCase(actionCreator, reducer)
+```
+
+一个异步计数器的例子
+
+```js
+const incrementAsync = createAsyncThunk('incrementAsync', async () => {
+  console.log('开始执行')
+  await new Promise(resolve => {
+    window.setTimeout(resolve, 2 * 1000)
+  })
+  console.log('执行结束')
+  return 10
+})
+
+const counterSlice = createSlice({
+  name: 'counter',
+  extraReducers: builder => {
+    builder
+      .addCase(incrementAsync.pending, (state, action) => {
+        console.log('pending', state, action)
+        return state // 一定要return, 否则 不会执行后面的 addCase
+      })
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        console.log('fulfilled:', state, action)
+        return state + action.payload
+        // 可以直接返回一个新的值 代替state, 或者在原始state值上进行操作
+      })
+  }
+})
+
+const Counter = () => {
+  const dispatch = useDispatch()
+  const handleClick = async () => {
+    const data = await dispatch(incrementAsync()).unwrap()
+    /**
+     * Redux Toolkit adds a .unwrap() function to the returned **Promise**, which will return a new
+     * Promise that either has the actual action.payload value from a fulfilled action, or throws an
+     * error if it's the rejected action.
+    */
+  }
+  return (
+    <Button onClick={handleClick}></Button>
+  )
+}
+```
