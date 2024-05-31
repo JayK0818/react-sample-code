@@ -232,3 +232,21 @@ const Counter = () => {
   )
 }
 ```
+## Nomalized State Structure
+
+  Redux Toolkit's **createEntityAdapter** API provvides a standardized way to store your data in a slice by taking
+  a collection of items and putting them into the shape of { ids: [], entities: {} }
+```js
+{
+  users: {
+    ids: ["user1", "user2", "user3"],
+    entities: {
+      "user1": {id: "user1", firstName, lastName},
+      "user2": {id: "user2", firstName, lastName},
+      "user3": {id: "user3", firstName, lastName},
+    }
+  }
+}
+```
+  It returns an object that contains a set of generated reducer functions for adding, updating, and removing
+  items from an entity state object.

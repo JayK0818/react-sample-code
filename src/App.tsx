@@ -38,6 +38,7 @@ import FixedTable from './components/fixed-table'
 import RefApp from './components/ref/index'
 // import TasksApp from './components/hooks/context-with-reducer'
 import ThunkApp from './components/redux/components/thunk'
+import ReduxAdapterApp from './components/redux/components/entity-adapter'
 
 function App() {
   return (
@@ -70,7 +71,7 @@ function App() {
 {/*       <ReduxApp />
       <FixedTable/> */}
       {/* <RefApp/> */}
-      <ThunkApp/>
+      <ReduxAdapterApp/>
     </div>
   );
 }
