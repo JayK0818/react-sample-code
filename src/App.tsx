@@ -31,14 +31,14 @@ import CreateBrowserRouterApp from './components/router/create-browser-router'
 // import HighOrderComponent from './components/high-order-component/index'
 // import CounterContextComponent from './components/context/index'
 import ReduxApp from './components/redux'
-import FixedTable from './components/fixed-table'
 // import RouterProtectApp from './components/router-protect'
 // import FormApp from './components/form/index'
 // import TodoApp from './components/redux/components/reselect'
 import RefApp from './components/ref/index'
 // import TasksApp from './components/hooks/context-with-reducer'
 import ThunkApp from './components/redux/components/thunk'
-import ReduxAdapterApp from './components/redux/components/entity-adapter'
+// import ReduxAdapterApp from './components/redux/components/entity-adapter'
+import MemoryRouterApp from './components/router/create-memory-router'
 
 function App() {
   return (
@@ -71,7 +71,7 @@ function App() {
 {/*       <ReduxApp />
       <FixedTable/> */}
       {/* <RefApp/> */}
-      <ReduxAdapterApp/>
+      <MemoryRouterApp/>
     </div>
   );
 }

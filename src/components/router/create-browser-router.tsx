@@ -61,7 +61,12 @@ class Player extends React.Component {
 const router = createBrowserRouter([
   {
     path: '/home',
-    element: <Home/>
+    element: <Home />,
+    handle: {
+      async middleware({ request }: any, context: any) {
+        console.log('中间件', request, context)
+      }
+    }
   },
   {
     path: '/counter',
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
     element: <Player/>
   }
 ], {
-  basename: '/react-app'
+  basename: '/react-app',
 })
 
 const App = () => {
