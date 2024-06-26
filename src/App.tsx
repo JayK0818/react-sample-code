@@ -38,7 +38,8 @@ import RefApp from './components/ref/index'
 // import TasksApp from './components/hooks/context-with-reducer'
 import ThunkApp from './components/redux/components/thunk'
 // import ReduxAdapterApp from './components/redux/components/entity-adapter'
-import MemoryRouterApp from './components/router/create-memory-router'
+// import MemoryRouterApp from './components/router/create-memory-router'
+import ReactRouterHookApp from './components/router/hook'
 
 function App() {
   return (
@@ -71,7 +72,7 @@ function App() {
 {/*       <ReduxApp />
       <FixedTable/> */}
       {/* <RefApp/> */}
-      <MemoryRouterApp/>
+      <ReactRouterHookApp/>
     </div>
   );
 }

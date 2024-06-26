@@ -36,7 +36,10 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
-## Active Links
+## NavLink
+
+  A `<NavLink>` is a special kink of `<Link>` that knowns whether or not it is 'active', 'pending', or
+  'transitioning'
 
 ```tsx
 import { useMatch, NavLink } from 'react-router-dom'
@@ -69,6 +72,10 @@ const Player = () => { // 页面路径为 /player
  * values in the URL it is hidden
 */
 <Link to='/user' state={{ from: 'home' }}></Link>
+<Link to='/user' reloadDocument={true}></Link> // reloadDocument 会刷新页面
+
+// replace: The replace property can be used if you'd like to replace the current entry in the history stack
+// preventScrollReset: let you prevent the scroll position from being reset to the top of the window
 
 const navigate = useNavigate()
 navigate('/user', { state: 'home' })
@@ -121,4 +128,44 @@ const App = () => {
   )
 }
 // The Outlet component will always render the next match.
+```
+
+## Route
+
+  Routes are perhaps the most important part of React Router app.
+
+  Routes are objects passed to the router creation functions:
+
+```ts
+const router = createBrowserRouter([
+  {
+    element: <Team/>,
+    path: 'teams/:teamId',
+    loader: async ({ request, params }) => {
+      return fetch('/api/v1/xxx')
+    },
+    action: async ({ request }) => {
+      return (//)
+    },
+    errorElement: <ErrorBoundary/>
+  }
+])
+```
+
+## Navigate
+
+  A `Navigate` element changes the current location when it is rendered.
+  it's a component wrapper around `useNavigate`.
+
+```tsx
+import { Navigate } from 'react-router-dom'
+
+const User = () => {
+  return (
+    <div>
+      {/* 页面会直接进行跳转 */}
+      <Navigate to='/user'/>
+    </div>
+  )
+}
 ```
