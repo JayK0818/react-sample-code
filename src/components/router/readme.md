@@ -169,3 +169,24 @@ const User = () => {
   )
 }
 ```
+
+## useNavigate
+
+```tsx
+const Home = () => {
+  const navigate = useNavigate()
+  const handleLogin = () => {
+    navigate('/login', {
+      replace: true,
+      state: {
+        {
+          name: 'hello'
+        }
+      }
+    })
+  }
+  return (
+    <Button onClick={ handleLogin }>登录</Button>
+  )
+}
+```

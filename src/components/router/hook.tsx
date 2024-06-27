@@ -1,5 +1,9 @@
 import React from 'react'
-import { Link, NavLink, createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom'
+import {
+  Link, NavLink, createBrowserRouter, RouterProvider, Outlet, Navigate,
+  useLocation, useMatch, useMatches, useNavigate
+} from 'react-router-dom'
+import { Button } from 'antd'
 
 const playerList = [
   {
@@ -20,26 +24,38 @@ const playerList = [
 ]
 
 const PlayerList = () => {
+  const location = useLocation()
+  console.log('location:', location)
+  const isMatch = useMatch(location.pathname)
+  console.log('is-match:', isMatch)
+  const matchers = useMatches() // This is most useful for creating abstractions in parent layouts to
+  // get access to their child route's data.
+  console.log('matchers:', matchers)
+  // useNavigate
+  const navigate = useNavigate()
   return (
-    <ul>
-      {
-        playerList.map(player => (
-          // reloadDocument 页面会刷新
-          <li key={ player.id }>
-            <Link
-              to={`/player/${player.id}`}
-              reloadDocument={false}
-            >{player.firstName}</Link>
-          </li>
-        ))
-      }
-    </ul>
+    <div>
+      <ul>
+        {
+          playerList.map(player => (
+            // reloadDocument 页面会刷新
+            <li key={ player.id }>
+              <Link
+                to={`/player/${player.id}`}
+                reloadDocument={false}
+              >{player.firstName}</Link>
+            </li>
+          ))
+        }
+      </ul>
+      <Button onClick={() => navigate(-1)}>编程式导航</Button>
+    </div>
   )
 }
 const User = () => {
   return (
     <div>
-      <Navigate to='login'/>
+      {/* <Navigate to='login'/> */}
       <div>我是用户页面</div>
     </div>
   )
