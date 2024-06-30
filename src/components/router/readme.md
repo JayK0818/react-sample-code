@@ -172,6 +172,8 @@ const User = () => {
 
 ## useNavigate
 
+  The `useNavigate` hook returns a function that lets you navigate programmatically.
+
 ```tsx
 const Home = () => {
   const navigate = useNavigate()
@@ -188,5 +190,55 @@ const Home = () => {
   return (
     <Button onClick={ handleLogin }>登录</Button>
   )
+}
+```
+
+## useNavigation
+
+  This hook tells you everything you need to know about a page navigation to build pending navigation indicators and
+  optimistic UI on data mutations.
+
+- navigation.state
+- navigation.location
+- navigation.formData
+- navigation.text
+- navigation.json
+
+```ts
+const Home = () => {
+  const navigation = useNavigation()
+  const text = 
+    navigation.state === 'submitting'
+      ? 'Saving...'
+      : navigation.state === 'loading'
+        ? 'saved'
+        : 'Go'
+  return (
+    <div></div>
+  )
+}
+```
+## useOutletContext
+
+  Ofen parent routes manage state or other values you want shared with child routes. You can create your own
+  `context provider` if you like.
+
+```tsx
+const Parent = () => {
+  const [count, setCount] = React.useState(0)
+  return (
+    <Outlet context={[count, setCount]}/>
+  )
+}
+
+import { useOutletContext } from 'react-router-dom'
+function Child () {
+  const [count, setCount] = useOutletContext()
+  const increment = () => {
+    setCount(c => c + 1)
+    return (
+      <Button onClick={ increment }>{ count }</Button>
+    )
+  }
 }
 ```

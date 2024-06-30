@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  Link, NavLink, createBrowserRouter, RouterProvider, Outlet, Navigate,
-  useLocation, useMatch, useMatches, useNavigate
+  Link, NavLink, createBrowserRouter, RouterProvider, Outlet,
+  useLocation, useMatch, useMatches, useNavigate, useNavigation
 } from 'react-router-dom'
-import { Button } from 'antd'
+import { Button, Spin } from 'antd'
 
 const playerList = [
   {
@@ -62,6 +62,8 @@ const User = () => {
 }
 
 const Home = () => {
+  const navigation = useNavigation()
+  console.log('navigation:', navigation)
   return (
     <div>
       <Link to='/player' style={{ marginRight: 10 }}>player</Link>
@@ -75,6 +77,7 @@ const Home = () => {
           })
         }
       >user</NavLink>
+      { navigation.state === 'loading' ? <Spin/> : null }
       <Outlet />
     </div>
   )

@@ -39,7 +39,8 @@ import RefApp from './components/ref/index'
 import ThunkApp from './components/redux/components/thunk'
 // import ReduxAdapterApp from './components/redux/components/entity-adapter'
 // import MemoryRouterApp from './components/router/create-memory-router'
-import ReactRouterHookApp from './components/router/hook'
+// import ReactRouterHookApp from './components/router/hook'
+import OutletContextApp from './components/router/use-outlet-context'
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
 {/*       <ReduxApp />
       <FixedTable/> */}
       {/* <RefApp/> */}
-      <ReactRouterHookApp/>
+      <OutletContextApp/>
     </div>
   );
 }
