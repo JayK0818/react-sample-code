@@ -2,7 +2,7 @@
 
 ## Install
 
-```js
+```shell
 cnpm install redux --save
 cnpm install @reduxjs/toolkit --save
 cnpm install react-redux --save

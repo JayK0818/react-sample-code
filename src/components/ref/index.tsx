@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Button } from 'antd'
 
-const RefTimerApp = () => {
+const RefTimerApp = () => { // 此demo可以正常清除
   const timerRef = useRef<null | number>(null)
   const [count, setCount] = useState(0)
   useEffect(() => {
@@ -23,7 +23,7 @@ const RefTimerApp = () => {
   }
   return (
     <div>
-      <Button onClick={handleClick}>click me { count } times</Button>
+      <Button onClick={handleClick} type={'primary'}>click me { count } times</Button>
     </div>
   )
 }
@@ -48,15 +48,16 @@ const UnClearIntervalApp = () => {
       console.log('world!!!')
     }, 1000)
     _timer = t
-    console.log('timer,', t)
+    console.log('timer,', t) // 1, 2
     // setTimer(timer.concat(t))
-    setTimer(t)
+    setTimer(t) // 这里导致组件重新渲染, click事件中的_timer为null
     return () => {
+      console.log('我执行了吗?', _timer) // 1
       window.clearTimeout(t)
     }
   }, [])
   return (
-    <div>
+    <div style={{ padding: 5 }}>
       <Button type={ 'primary' } onClick={handleClick}>click me { count } times</Button>
     </div>
   )
@@ -79,8 +80,8 @@ const FocusInput = () => {
 const App = () => {
   return (
     <>
-      <RefTimerApp />
-      {/* <UnClearIntervalApp/> */}
+      {/* <RefTimerApp /> */}
+      <UnClearIntervalApp/>
       <FocusInput/>
     </>
   )

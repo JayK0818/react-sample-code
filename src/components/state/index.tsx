@@ -29,6 +29,7 @@ const FeedbackForm = () => {
   const handleClick = () => {
     setName(prompt('What is your name?') as string)
     alert(`Hello, ${name}`)
+    // alert为上一次输入的字符串
   }
   return (
     <button onClick={handleClick}>Greet</button>
@@ -132,21 +133,47 @@ class ClassCouner extends React.Component {
     )
   }
 }
+
+/**
+ * @description state初始值为一个函数
+*/
+const FunctionStatementComponent = () => {
+  const [count, setCount] = useState(() => {
+    console.log('计算了吗?') // useState中的函数只会在渲染时执行一次
+    let sum = 0
+    for (let i = 0; i < 100; i++) {
+      sum += i
+    }
+    return sum
+  })
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount(count + 1)}>click me</button>
+    </div>
+  )
+}
+
 const App = () => {
   return (
     <>
-      {/* state是隔离 且私有的 */}
+      {/* state是隔离 且私有的, 每个组件维护自身的状态 */}
       <Gallery />
+      <hr />
       <Gallery />
       <FeedbackForm />
+      <hr />
       <Counter />
+      <hr/>
       <RequestTracker />
       <hr />
       <UpdateObjectApp />
       <hr />
       <UpdateArrayApp />
       <hr />
-      <ClassCouner/>
+      <ClassCouner />
+      <hr />
+      <FunctionStatementComponent/>
     </>
   )
 }

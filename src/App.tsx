@@ -41,40 +41,49 @@ import ThunkApp from './components/redux/components/thunk'
 // import MemoryRouterApp from './components/router/create-memory-router'
 // import ReactRouterHookApp from './components/router/hook'
 import OutletContextApp from './components/router/use-outlet-context'
-
+import MemoApplication from './components/hooks/memo'
+import { ConfigProvider } from 'antd';
 function App() {
   return (
-    <div className="App">
-      {/* <DataMutationApp/> */}
-      {/* <ActiveLinkApp/> */}
-      {/* <NestRouterApp /> */}
-      {/* <DynamicRouterApp/> */}
-      {/* <PendingNavigateApp/> */}
-{/*       <BaseRouterApp/>
-      <Gallery />
-      <TodoList />
-      <ConditionApp />
-      <RederListApp />
-      <EventApp />
-      <StateApp />
-      <StateManagement />
-      <StateShareApp />
-      <hr />
-      <StateRetentionResetApp />
-      <hr />
-      <UseRefApp />
-      <hr />
-      <TodoApp />
-      <hr />
-      <UseMemoApp />
-      <CustomHookApp />
-      <ClassNameApp /> */}
-      {/* <ClassModuleApp/> */}
-{/*       <ReduxApp />
-      <FixedTable/> */}
-      {/* <RefApp/> */}
-      <OutletContextApp/>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          borderRadius: 0
+        }
+      }}
+    >
+      <div className="App">
+        {/* <DataMutationApp/> */}
+        {/* <ActiveLinkApp/> */}
+        {/* <NestRouterApp /> */}
+        {/* <DynamicRouterApp/> */}
+        {/* <PendingNavigateApp/> */}
+  {/*       <BaseRouterApp/>
+        <Gallery />
+        <TodoList />
+        <ConditionApp />
+        <RederListApp />
+        <EventApp />
+        <StateApp />
+        <StateManagement />
+        <StateShareApp />
+        <hr />
+        <StateRetentionResetApp />
+        <hr />
+        <UseRefApp />
+        <hr />
+        <TodoApp />
+        <hr />
+        <UseMemoApp />
+        <CustomHookApp />
+        <ClassNameApp /> */}
+        {/* <ClassModuleApp/> */}
+  {/*       <ReduxApp />
+        <FixedTable/> */}
+        {/* <RefApp/> */}
+        <RefApp/>
+      </div>
+    </ConfigProvider>
   );
 }
 
