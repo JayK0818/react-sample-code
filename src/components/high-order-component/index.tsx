@@ -1,5 +1,5 @@
 import React from 'react'
-
+// -------------------- 属性代理 ---------------------
 function mouseMove(WrappedComponent: any) {
   return class MouseMoveComponent extends React.Component {
     constructor(props: any) {
@@ -28,6 +28,10 @@ function mouseMove(WrappedComponent: any) {
     }
   }
 }
+// ----------------- 条件渲染 ----------------
+function ConditionHighOrderComponent(WrappedComponent: any) {
+  return (props: any) => props.visible ? <WrappedComponent {...props} /> : <div>暂无数据！！！！！！</div>
+}
 
 class MouseMove extends React.Component {
   constructor(props: any) {
@@ -38,6 +42,35 @@ class MouseMove extends React.Component {
     return <div>x: {x} - { y }</div>
   }
 }
+
+function VisibleComponent(props: any) {
+  console.log('visible-component:', props)
+  return <div>你可以看见我</div>
+}
+
+// -----------------反向继承----------------
+const ReverseInherit = (WrappedComponent: any) => {
+  return class ChildComponent extends WrappedComponent {
+    constructor(props: any) {
+      super(props)
+    }
+    componentDidMount() { // 覆盖了父组件的componentDidMount
+      console.log('child-component-mounted')
+    }
+    render() {
+      return super.render()
+    }
+  }
+}
+class ParentComponent extends React.Component {
+  componentDidMount() {
+    console.log('parent-component-mount')
+  }
+  render() {
+    return <div>我是父组件12345</div>
+  }
+}
+console.log(ParentComponent.prototype)
 
 // render-props
 class RenderPropsComponent extends React.Component {
@@ -55,6 +88,9 @@ class RenderPropsComponent extends React.Component {
 }
 const App = () => {
   const JSX = mouseMove(MouseMove)
+  const VisibleComponentJSX = ConditionHighOrderComponent(VisibleComponent)
+  const InheritParentJSX = ReverseInherit(ParentComponent)
+  console.log('hello', InheritParentJSX)
   return (
     <div>
       <JSX />
@@ -62,7 +98,11 @@ const App = () => {
         // @ts-ignore
         render={(data: any) => {
         return (<div>{ data.message }</div>)
-      }}></RenderPropsComponent>
+        }}></RenderPropsComponent>
+      <VisibleComponentJSX visible={true} message={'hello world'} />
+      <VisibleComponentJSX visible={false} />
+        {/* @ts-ignore */}
+      <InheritParentJSX/>
     </div>
   )
 }

@@ -28,7 +28,7 @@ import 'antd/dist/reset.css'
 // import ReactRouterApp from './components/react-router-app/index'
 import CreateBrowserRouterApp from './components/router/create-browser-router'
 // import CreateHashRouterApp from './components/router/create-hash-router'
-// import HighOrderComponent from './components/high-order-component/index'
+import HighOrderComponent from './components/high-order-component/index'
 // import CounterContextComponent from './components/context/index'
 import ReduxApp from './components/redux'
 // import RouterProtectApp from './components/router-protect'
@@ -43,6 +43,9 @@ import ThunkApp from './components/redux/components/thunk'
 import OutletContextApp from './components/router/use-outlet-context'
 import MemoApplication from './components/hooks/memo'
 import { ConfigProvider } from 'antd';
+import UseCallbackApp from './components/hooks/useCallback'
+import TanstackRouterApp from './components/tanstack-rouer-app/index'
+
 function App() {
   return (
     <ConfigProvider
@@ -81,7 +84,7 @@ function App() {
   {/*       <ReduxApp />
         <FixedTable/> */}
         {/* <RefApp/> */}
-        <RefApp/>
+        <TanstackRouterApp/>
       </div>
     </ConfigProvider>
   );
