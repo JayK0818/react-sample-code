@@ -1,49 +1,49 @@
 import {
   Outlet,
-  Link,
   createRouter,
   createRoute,
   createRootRoute,
 } from '@tanstack/react-router'
+import Home from './pages/Home'
+import User from './pages/User'
+import Navigation from './pages/Navigation'
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 const rootRoute = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/user" className="[&.active]:font-bold">
-          User
-        </Link>
-      </div>
-      <hr />
+      <Navigation/>
       <Outlet />
+      <TanStackRouterDevtools/>
     </>
   ),
 })
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/',
-  component: function Index() {
-    return (
-      <div className="p-2">
-        <h3>Welcome Home!</h3>
-      </div>
-    )
-  },
+  path: '/home',
+  component: Home
 })
 
 const userRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/user',
-  component: function About() {
-    return <div className="p-2">Hello from About!</div>
-  },
+  component: User
 })
-// @ts-ignore   (此处会报错)?????
+
+// 嵌套路由
+const singerRoute = createRoute({
+  getParentRoute: () => userRoute,
+  path: 'singer',
+  component: function Singer() {
+    return (<div>我是歌手</div>)
+  }
+})
+userRoute.addChildren([singerRoute])
+
 const routeTree = rootRoute.addChildren([indexRoute, userRoute])
+
+console.log(routeTree)
 
 const router = createRouter({ routeTree })
 
