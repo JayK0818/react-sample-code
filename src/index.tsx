@@ -7,7 +7,9 @@ import App from './App';
 // import store from './store/index'
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement, {
+    identifierPrefix: 'react-sample-app-'
+  }
 );
 root.render(
   <React.StrictMode>

@@ -84,7 +84,7 @@ function App() {
   {/*       <ReduxApp />
         <FixedTable/> */}
         {/* <RefApp/> */}
-        <TanstackRouterApp/>
+        <RefApp/>
       </div>
     </ConfigProvider>
   );

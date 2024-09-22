@@ -18,3 +18,52 @@ function Counter () {
 1. 存储 **timeout ID**
 2. 存储和操作 **DOM 元素**
 3. 存储不需要被用来计算JSX的其他对象
+
+# forwardRef
+
+  `forwardRef`允许组件使用 `ref` 将DOM节点暴露给父组件
+
+```tsx
+const MyInput = forwardRef(function MyInput(props, ref) {
+  return (
+    <input ref={ ref }/>
+  )
+})
+
+const Form = () => {
+  const ref = useRef(null)
+  return (
+    <MyInput ref={ref}/>
+  )
+}
+```
+
+# useImperativeHandle
+
+  暴露命令式句柄而非直接暴露DOM节点
+```tsx
+import { forwardRef, useRef, useImperativeHandle } from 'react'
+
+const MyInput = forwarderRef(function (props, ref) {
+  const inputRef = useRef(null)
+  useImperativeHandle(ref, () => {
+    return {
+      focus () {
+        inputRef.current.focus()
+      }
+    }
+  }, [])
+})
+
+const Form = () => {
+  const ref = useRef(null)
+  useEffect(() => {
+    ref.current?.focus()  // 此时current为自组件暴露出来的句柄, 而非DOM节点
+  }, [])
+  return (
+    <input
+      ref={ref}
+    />
+  )
+}
+```

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Button } from 'antd'
+import MyInput from './forwardRef'
 
 const RefTimerApp = () => { // 此demo可以正常清除
   const timerRef = useRef<null | number>(null)
@@ -77,12 +78,29 @@ const FocusInput = () => {
   )
 }
 
+// -------------------forwardRef-------------------
 const App = () => {
+  // forwardRef 获取焦点
+  const ref = useRef<null | HTMLInputElement>(null)
+  const handleClick = (): void => {
+    if (ref.current) {
+      ref.current.focus()
+      console.log(ref.current)
+      // 暴露句柄的方式, current为暴露的对象
+      // 暴露DOM节点的方式, current为DOM节点
+    }
+  }
   return (
     <>
       {/* <RefTimerApp /> */}
       <UnClearIntervalApp/>
-      <FocusInput/>
+      <FocusInput />
+      <Button
+        type={'primary'}
+        size={'small'}
+        onClick={handleClick}
+      >handle input focus</Button>
+      <MyInput ref={ref} />
     </>
   )
 }
