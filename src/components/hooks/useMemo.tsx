@@ -68,6 +68,16 @@ const ThemeButton = () => {
   )
 }
 
+const Player = () => {
+  const [name, setName] = useState('name')
+  const [age, setAge] = useState(30)
+  // -------------- 最小化props的变化 ---------------
+  const person = useMemo(
+    () => ({ name, age }),
+    []
+  )
+}
+
 const App: FC = () => {
   return (
     <>

@@ -2,8 +2,8 @@
 
   当你 希望组件 '记住' 某些信息, 但又不想让这些信息 触发新的渲染, 可以使用ref
 
-```ts
-import { useRef } from 'react'
+```jsx
+import { useRef, useEffect } from 'react'
 
 function Counter () {
   const countRef = useRef(0)
@@ -23,7 +23,8 @@ function Counter () {
 
   `forwardRef`允许组件使用 `ref` 将DOM节点暴露给父组件
 
-```tsx
+```jsx
+import { forwardRef, useRef } from 'react'
 const MyInput = forwardRef(function MyInput(props, ref) {
   return (
     <input ref={ ref }/>
@@ -41,7 +42,8 @@ const Form = () => {
 # useImperativeHandle
 
   暴露命令式句柄而非直接暴露DOM节点
-```tsx
+
+```jsx
 import { forwardRef, useRef, useImperativeHandle } from 'react'
 
 const MyInput = forwarderRef(function (props, ref) {

@@ -41,10 +41,12 @@ import ThunkApp from './components/redux/components/thunk'
 // import MemoryRouterApp from './components/router/create-memory-router'
 // import ReactRouterHookApp from './components/router/hook'
 import OutletContextApp from './components/router/use-outlet-context'
-import MemoApplication from './components/hooks/memo'
+// import MemoApplication from './components/hooks/memo'
 import { ConfigProvider } from 'antd';
 import UseCallbackApp from './components/hooks/useCallback'
 import TanstackRouterApp from './components/tanstack-rouer-app/index'
+// import LazyApplication from './components/lazy/index'
+import ContextMemoApp from './components/memo/context-memo'
 
 function App() {
   return (
@@ -84,7 +86,7 @@ function App() {
   {/*       <ReduxApp />
         <FixedTable/> */}
         {/* <RefApp/> */}
-        <RefApp/>
+        <ContextMemoApp/>
       </div>
     </ConfigProvider>
   );
